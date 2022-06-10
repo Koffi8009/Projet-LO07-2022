@@ -1,7 +1,20 @@
+
+<!-- ----- debut ControllerEvenenment -->
+
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
+require_once '../model/ModelEvenement.php';
 
+class ControllerEvenement{
+    
+    // --- page d'acceuil
+    public static function genealogieAccueil() {
+        include './config.php';
+        $vue = $root . '/app/view/viewAccueil.php';
+        if (DEBUG)
+            echo ("ControllerEvenement : genealogieAccueil : vue = $vue");
+        require ($vue);
+    }
+}
+
+?>
