@@ -1,6 +1,5 @@
 
 <!-- ----- debut Router -->
-
 <?php
 require '../controller/ControllerEvenement.php';
 require '../controller/ControllerFamille.php';
@@ -49,7 +48,7 @@ switch ($action) {
     //Tâche par défaut
     default :
         $action = "genealogieAcceuil";
-        ControllerEvenement::$action($args);
+        ControllerEvenement::genealogieAccueil();
 }
 
 
