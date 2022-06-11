@@ -29,7 +29,7 @@ switch ($action) {
     case "familleCreated" :
     case "familleReadId" :
     case "familleReadOne" :
-        ControllerFamille::$action($args);
+        ControllerFamille::$action();
         break;
     case "individuReadAll" :
     case "individuCreate" :

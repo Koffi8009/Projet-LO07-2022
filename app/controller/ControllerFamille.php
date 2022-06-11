@@ -2,7 +2,7 @@
 <!-- ----- debut ControllerFamille -->
 
 <?php
-
+session_start();
 require '../model/ModelFamille.php';
 
 class ControllerFamille {
@@ -12,6 +12,7 @@ class ControllerFamille {
         $results = ModelFamille::getAll();
         // ----- Construction chemin de la vue
         include 'config.php';
+        $_SESSION['titre']="Pas de famille sélectionnée";
         $vue = $root . '/app/view/famille/viewAll.php';
         if (DEBUG)
             echo ("ControllerFamille : familleReadAll : vue = $vue");
@@ -19,10 +20,8 @@ class ControllerFamille {
     }
 
     // Affiche un formulaire pour sélectionner un id qui existe
-    public static function familleReadId($args) {
-        $results = ModelFamille::getAllId();
-        $target=$args['target'];
-        if (DEBUG) echo ("ControllerFamille:familleReadId : target = $target<br>");
+    public static function familleReadId() {
+        $results = ModelFamille::getAllName();
         
         // ----- Construction chemin de la vue
         include 'config.php';
@@ -32,18 +31,19 @@ class ControllerFamille {
 
     // Affiche une famille particulière (id)
     public static function familleReadOne() {
-        $famille_id = $_GET['id'];
-        $results = ModelFamille::getOne($famille_id);
-
+        $famille_nom = $_GET['nom'];
+        $results = ModelFamille::getOne($famille_nom);
+        $_SESSION['titre']=$_GET['nom'];
+        
         // ----- Construction chemin de la vue
         include 'config.php';
-        $vue = $root . '/app/view/famille/viewAll.php';
+        $vue = $root . '/app/view/famille/viewSelection.php';
         require ($vue);
     }
 
     // Affiche le formulaire de creation d'une famille
     public static function familleCreate() {
-  
+        $_SESSION['titre']="Pas de famille sélectionnée";
         // ----- Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/famille/viewInsert.php';
@@ -59,11 +59,11 @@ class ControllerFamille {
             $valide=1;
         }
         else{
-            $results = ModelFamaille::insert(
+            $results = ModelFamille::insert(
                 htmlspecialchars($_GET['nom'])
             );
         }
-        
+        $_SESSION['titre']=$_GET['nom'];
         // ----- Construction chemin de la vue
         include 'config.php';
         $vue = $root . '/app/view/famille/viewInserted.php';

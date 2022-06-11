@@ -2,7 +2,7 @@
 <!-- ----- debut ControllerEvenenment -->
 
 <?php
-
+session_start();
 require_once '../model/ModelEvenement.php';
 
 class ControllerEvenement {
